@@ -1,9 +1,6 @@
-const codespaceName = import.meta.env.VITE_CODESPACE_NAME
-const apiOrigin = codespaceName ? `https://${codespaceName}-8000.app.github.dev` : 'http://localhost:8000'
-
-export async function fetchResource(resource) {
-  const response = await fetch(`${apiOrigin}/api/${resource}/`)
-  if (!response.ok) throw new Error(`Unable to load ${resource}`)
+export async function fetchResource(endpoint) {
+  const response = await fetch(endpoint)
+  if (!response.ok) throw new Error(`Unable to load ${endpoint}`)
   const payload = await response.json()
   if (Array.isArray(payload)) return payload
   if (Array.isArray(payload.data)) return payload.data
